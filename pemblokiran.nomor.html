@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PN (Pemblokir Number) By ALL</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #e8f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            border-top: 5px solid #c0392b;
+        }
+        h1 {
+            color: #c0392b;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+            background-color: white;
+        }
+        /* Menambahkan jarak antara select dan input nomor rekening */
+        select {
+            margin-bottom: 10px;
+        }
+        .submit-btn {
+            width: 100%;
+            background-color: #c0392b;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background-color: #a93226;
+        }
+        .warning {
+            background-color: #fdf2e9;
+            border-left: 4px solid #e67e22;
+            padding: 15px;
+            margin-top: 25px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .warning strong {
+            color: #d35400;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>PN (Pemblokir Number) By ALL</h1>
+        <p class="subtitle">anda sopan kami segan anda menipu kami blokir nomor you</p>
+
+        <form id="laporanForm">
+            <div class="form-group">
+                <label for="nomorHpPenipu">NOMOR HP PENIPU:</label>
+                <input type="text" id="nomorHpPenipu" placeholder="Contoh: +628123456789" required>
+            </div>
+
+            <div class="form-group">
+                <label>JENIS & NOMOR REKENING PENIPU:</label>
+                <select id="jenisRekening" required>
+                    <option value="" disabled selected>Pilih Jenis Rekening</option>
+                    <option value="DANA">DANA</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BRI">BRI</option>
+                    <option value="BNI">BNI</option>
+                    <option value="Mandiri">Mandiri</option>
+                    <option value="OVO">OVO</option>
+                    <option value="Gopay">Gopay</option>
+                    <option value="Rekening Virtual Lainnya">Rekening Virtual Lainnya</option>
+                </select>
+                <input type="text" id="nomorRekeningPenipu" placeholder="Masukkan nomor rekening" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hariPenipuan">HARI/TANGGAL PENIPUAN:</label>
+                <input type="date" id="hariPenipuan" required>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="kirimLaporan()">
+                📩 KIRIM LAPORAN KE WHATSAPP
+            </button>
+        </form>
+
+        <div class="warning">
+            <strong>PENTING:</strong> Setelah email terbuka, <strong>wajib</strong> lampirkan bukti screenshot (chat, bukti transfer, dll.) sebelum mengirim. Tanpa bukti, laporan mungkin tidak diproses.
+        </div>
+    </div>
+
+    <script>
+        function kirimLaporan() {
+            // Ambil data dari form
+            const nomorHp = document.getElementById('nomorHpPenipu').value;
+            const jenisRekening = document.getElementById('jenisRekening').value;
+            const nomorRekening = document.getElementById('nomorRekeningPenipu').value;
+            const hariPenipuan = document.getElementById('hariPenipuan').value;
+
+            // Validasi sederhana
+            if (!nomorHp || !jenisRekening || !nomorRekening || !hariPenipuan) {
+                alert('Semua field wajib diisi dengan lengkap!');
+                return;
+            }
+
+            // Format tanggal agar lebih mudah dibaca
+            const tanggal = new Date(hariPenipuan).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            
+            // Gabungkan jenis dan nomor rekening
+            const rekeningLengkap = `${jenisRekening} - ${nomorRekening}`;
+
+            // --- ISI EMAIL YANG SANGAT EFEKTIF ---
+            const subject = `Laporan Pelanggaran Berat: Penipuan oleh Akun ${nomorHp}`;
+
+            const body = `
+Kepada Tim Peninjau WhatsApp,
+
+Saya menulis untuk melaporkan sebuah pelanggaran berat yang dilakukan oleh akun WhatsApp. Akun ini telah melakukan tindakan penipuan yang merugikan pengguna dan jelas-jelas melanggar Kebijakan Layanan WhatsApp.
+
+Berikut adalah data laporan:
+
+---
+PELAPORAN PENIPUAN
+NOMOR HP PENIPU: ${nomorHp}
+NOMOR REKENING PENIPU: ${rekeningLengkap}
+HARI PENIPUAN: ${tanggal}
+---
+
+Akun ini telah menyalahgunakan platform WhatsApp untuk melakukan kejahatan. Tindakan ini tidak hanya merugikan saya secara finansial, tetapi juga berpotensi besar untuk merugikan banyak korban lainnya jika tidak segera ditindak.
+
+Saya secara resmi memohon agar tim mengambil tindakan tegas dan segera. Mohon untuk **MENONAKTIFKAN PERMANEN (BLOKIR)** akun nomor ${nomorHp} sebagai langkah preventif untuk melindungi integritas platform dan keamanan seluruh pengguna WhatsApp.
+
+Bukti-bukti terlampir dalam bentuk screenshot.
+
+Terima kasih atas perhatian dan tindak lanjutnya.
+
+Hormat saya,
+Pengguna WhatsApp yang dirugikan.
+`;
+
+            // Buat link mailto dan buka
+            const mailtoLink = `mailto:support@whatsapp.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink);
+        }
+    </script>
+
+</body>
+</html>
